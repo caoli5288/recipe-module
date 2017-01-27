@@ -1,0 +1,5 @@
+name: RecipeModule
+main: com.i5mc.recipe.module.Main
+version: ${project.version}
+depend: [PowerNBT, SimpleORM]
+softdepend: [ProRecipes]
