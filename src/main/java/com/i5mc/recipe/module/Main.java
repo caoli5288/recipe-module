@@ -31,10 +31,13 @@ public class Main extends JavaPlugin implements Listener {
 
     protected static EbeanServer db;
     protected static Plugin pl;
+    protected static Messenger messenger;
 
     @Override
     public void onEnable() {
         pl = this;
+        messenger = new Messenger(this);
+
         EbeanHandler handler = EbeanManager.DEFAULT.getHandler(this);
         if (handler.isNotInitialized()) {
             handler.define(RecipeLimit.class);

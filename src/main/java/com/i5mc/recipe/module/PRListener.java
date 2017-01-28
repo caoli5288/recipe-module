@@ -41,12 +41,13 @@ public class PRListener implements Listener {
 
     private void click(InventoryClickEvent event, HumanEntity who, ItemStack item) {
         if (event.isShiftClick()) {
-            who.sendMessage(ChatColor.RED + "该合成不支持批量，请松开SHIFT键后重试");
+            Main.messenger.send(who, "craft.shift", ChatColor.RED + "该合成不支持批量，请松开SHIFT键后重试");
             event.setCancelled(true);
         } else {
             int limit = Main.addLimit(who, item, item.getAmount());
             if (limit > -1) {
-                who.sendMessage(ChatColor.GREEN + "此类物品合成限制剩余" + limit + "次");
+                String l = Main.messenger.find("craft.limit", ChatColor.GREEN + "此类物品合成限制剩余%d次");
+                who.sendMessage(String.format(l, limit));
             }
         }
     }
