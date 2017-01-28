@@ -23,11 +23,8 @@ public class RecipeLimiter extends HashMap<String, Integer> {
         return computeIfAbsent(String.valueOf(key), l -> 0);
     }
 
-    public static void init(List<RecipeLimit> l) {
-        for (RecipeLimit i : l) {
-            RecipeLimiter limiter = getLimiter(i.getRecipe());
-            limiter.put(i.getPlayer(), -(i.getLi()));
-        }
+    public static void init(List<RecipeLimit> list) {
+        list.forEach(i -> getLimiter(i.getRecipe()).put(i.getPlayer(), -(i.getLi())));
     }
 
     public static RecipeLimiter getLimiter(String i) {

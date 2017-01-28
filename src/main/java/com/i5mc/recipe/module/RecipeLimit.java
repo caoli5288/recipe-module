@@ -1,5 +1,6 @@
 package com.i5mc.recipe.module;
 
+import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.validation.NotNull;
 
 import javax.persistence.Entity;
@@ -62,8 +63,12 @@ public class RecipeLimit {
 
     @Override
     public boolean equals(Object i) {
-        if ($.nil(i)) return false;
+        if (Main.nil(i)) return false;
         return i.getClass() == getClass() && i.hashCode() == hashCode();
+    }
+
+    public void store(EbeanServer db) {
+        db.save(this);
     }
 
 }
