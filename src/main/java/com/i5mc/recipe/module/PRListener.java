@@ -22,7 +22,7 @@ public class PRListener implements Listener {
         ItemStack item = event.getResult();
         Player p = event.getPlayer();
         int l = Main.getLimit(p, item);
-        if (l > -1 && (l == 0 || l - event.getResult().getAmount() < 0)) {
+        if (l == 0) {
             event.setCancelled(true);
         }
     }
@@ -44,7 +44,7 @@ public class PRListener implements Listener {
             Main.messenger.send(who, "craft.shift", ChatColor.RED + "该合成不支持批量，请松开SHIFT键后重试");
             event.setCancelled(true);
         } else {
-            int limit = Main.addLimit(who, item, item.getAmount());
+            int limit = Main.addLimit(who, item, 1);
             if (limit > -1) {
                 String l = Main.messenger.find("craft.limit", ChatColor.GREEN + "此类物品合成限制剩余%d次");
                 who.sendMessage(String.format(l, limit));
