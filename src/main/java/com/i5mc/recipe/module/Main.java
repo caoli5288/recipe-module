@@ -102,11 +102,13 @@ public class Main extends JavaPlugin implements Listener {
         // recipe.id : string
         // recipe.limit : int
         NBTCompound compound = NBTManager.getInstance().read(item);
-        NBTCompound recipe = compound.getCompound("recipe");
-        if (!nil(recipe)) {
-            RecipeLimiter limiter = RecipeLimiter.getLimiter(recipe.getString("id"));
-            int limit = recipe.getInt("limit");
-            return limit - limiter.get(p.getName());
+        if (!nil(compound)) {
+            NBTCompound recipe = compound.getCompound("recipe");
+            if (!nil(recipe)) {
+                RecipeLimiter limiter = RecipeLimiter.getLimiter(recipe.getString("id"));
+                int limit = recipe.getInt("limit");
+                return limit - limiter.get(p.getName());
+            }
         }
         return -1;
     }
