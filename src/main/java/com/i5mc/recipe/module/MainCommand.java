@@ -41,6 +41,7 @@ public class MainCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] i) {
+        if (!sender.hasPermission("recipe.admin")) return false;
         if (i.length == 0) {
             sender.sendMessage("/recipe-module limit <player> <recipe> <limit>");
         } else {
